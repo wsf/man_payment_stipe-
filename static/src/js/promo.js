@@ -6,16 +6,36 @@ odoo.define('payment_stripe.stripe', function (require) {
 
     // Averiguo cual es el total que tiene que carrito de compra
     var rr =$("#order_total strong.monetary_field").text();
-    console.log(rr);
+    console.log("---- El total del carrito de compra es " + rr);
 
   // Esta función se ejecuta cuando se presiona el botón con el id=btn_cal_val_cuotas
   $("#btn_cal_val_cuotas").click(function(){
+
+
         // paso 1: averiguo cual es la promo que tiene el tilde y le tomo los datos de la promo.
         // 1.1 recorro todos los select que hay
 
         var datos_promo_seleccionada;
         $('input[type=checkbox]:checked').each(function() {
-                  datos_promo_seleccionada = $(this).val()
+                  datos_promo_seleccionada = $(this).val();
+
+                  var due = parseFloat(datos_promo_seleccionada.split(",")[0].split(":")[1]);
+                  var tax = parseFloat(datos_promo_seleccionada.split(",")[1].split(":")[1]).toFixed(2);
+                  var total_carrito  = $("#order_total strong.monetary_field").text();
+                  var total = parseFloat(total_carrito.replace("$","").replace(",",".")).toFixed(2);
+
+                  // calculamos las cuotas según los intereses
+                  // calculamos las cuotas según los intereses
+                var ttotal, importe_cuotas = 0;
+
+                ttotal = (total * ((tax / 100) + 1)).toFixed(2);
+                importe_cuotas = (ttotal / due).toFixed(2).toString().replace(".",",");
+                ttotal = ttotal.toString().replace(".",",")
+
+                $("#cuota").text("> Cantidad de cuotas: " + due)
+                $("#importe").text("> Pago mensual: $ " + importe_cuotas)
+                $("#total").text("> Total a pagar: $ " + ttotal)
+
                   console.log("Checkbox " + $(this).prop("id") +  " (" + datos_promo_seleccionada + ") Seleccionado");
               });
 
@@ -28,9 +48,9 @@ odoo.define('payment_stripe.stripe', function (require) {
 
         // ---- pruebas de Ale
         var r_select_promo = $("#promo10").text()
-        console.log(" -- Leyendo la ppromo 10 -> " + r_select_promo);
+        console.log(" -- Leyendo la promo 10 -> " + r_select_promo);
 
-  		alert($("#order_total strong.monetary_field").text());
+  		//alert($("#order_total strong.monetary_field").text());
 
   		// veo si un checkbox está tildado.
   		var r = $('#rdb_promo10').is(':checked')
