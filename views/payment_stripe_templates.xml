@@ -7,8 +7,8 @@
             <input type="text" name="stripe_key" t-att-value="acquirer.stripe_publishable_key"/>
             <script type="text/javascript">
                 odoo.define(function (require) {
-                    var ajax = require('web.ajax');
-                    ajax.loadJS("/payment_stripe/static/src/js/stripe.js");
+                var ajax = require('web.ajax');
+                ajax.loadJS("/payment_stripe/static/src/js/stripe.js");
                 });
             </script>
         </template>
@@ -16,25 +16,26 @@
         <template id="stripe_s2s_form">
 
             <div id="insertar">
-                    <button id="btn_cal_val_cuotas" type="button"
-                    class="btn btn-success">Clic para calcular el importe a pagar según promoción seleccionada</button>
+<!--                <button id="btn_cal_val_cuotas" type="button"-->
+<!--                        class="btn btn-success">Clic para calcular el importe a pagar según promoción seleccionada-->
+<!--                </button>-->
             </div>
 
             <br></br>
 
-            <div class = "container">
+            <div class="container">
 
-                <b> Datos del pago que tiene realizar: </b>
+                <b>Datos del pago que tiene realizar:</b>
 
-                 <div class="panel panel-default">
+                <div class="panel panel-default">
 
-                    <div id="cuota" class="panel-body"> > Cantidad de cuotas: </div>
+                    <div id="cuota" class="panel-body">> Cantidad de cuotas:</div>
 
-                    <div id="importe" class="panel-body"> > Pago mensual: </div>
+                    <div id="importe" class="panel-body">> Pago mensual:</div>
 
-                    <div id="total" class="panel-body" >  > Total a pagar:  </div>
+                    <div id="total" class="panel-body">> Total a pagar:</div>
 
-                 </div>
+                </div>
 
             </div>
 
@@ -51,7 +52,9 @@
 
 
                 <b>Datos de la tarjeta</b>
-
+                <div>
+                    <input type="text" placeholder="Introduce tu nombre" style="border:none; background: none; outline: none;" id="nombre_tarjeta"/>
+                </div>
                 <div id="card-element" class="m-3"/>
                 <div id="card-errors" class="m-3 text-danger"/>
             </div>
