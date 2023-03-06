@@ -8,6 +8,9 @@ odoo.define('payment_stripe.stripe', function (require) {
     var rr =$("#order_total strong.monetary_field").text();
     console.log("---- El total del carrito de compra es " + rr);
 
+    var select = $('#promos_select');
+    $('#insercion_select').append(select);
+
   // Esta función se ejecuta cuando se presiona el botón con el id=btn_cal_val_cuotas
   $("#btn_cal_val_cuotas").click(function(){
 
@@ -60,6 +63,7 @@ odoo.define('payment_stripe.stripe', function (require) {
 
     //Pruebas JR
 
+    //ONCHANGE EN SELECT PROMOS
     $("#promos_select").change(function(){
         let option = $('select option:selected').val();
         console.log(option)
@@ -71,7 +75,7 @@ odoo.define('payment_stripe.stripe', function (require) {
               console.log('Impuesto', tax)
               var total_carrito  = $("#order_total strong.monetary_field").text();
               console.log('Total del Carrito', total_carrito)
-              var total = parseFloat(total_carrito.replace("$","").replace(",",".")).toFixed(2);
+              var total = parseFloat(total_carrito.replace("$","").replace(".","")).toFixed(2);
               console.log('Total', total)
 
               // calculamos las cuotas según los intereses
@@ -79,6 +83,7 @@ odoo.define('payment_stripe.stripe', function (require) {
             var ttotal, importe_cuotas = 0;
 
             ttotal = (total * ((tax / 100) + 1)).toFixed(2);
+            console.log("ttotal 1", ttotal)
             importe_cuotas = (ttotal / due).toFixed(2).toString().replace(".",",");
             ttotal = ttotal.toString().replace(".",",")
 
