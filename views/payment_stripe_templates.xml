@@ -16,14 +16,19 @@
         <template id="stripe_s2s_form">
 
             <div id="insertar">
-<!--                <button id="btn_cal_val_cuotas" type="button"-->
-<!--                        class="btn btn-success">Clic para calcular el importe a pagar según promoción seleccionada-->
-<!--                </button>-->
+                <!--                <button id="btn_cal_val_cuotas" type="button"-->
+                <!--                        class="btn btn-success">Clic para calcular el importe a pagar según promoción seleccionada-->
+                <!--                </button>-->
             </div>
 
             <br></br>
 
             <div class="container">
+
+                <div id="insercion_select">
+
+                </div>
+                <br></br>
 
                 <b>Datos del pago que tiene realizar:</b>
 
@@ -48,12 +53,13 @@
             <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url"/>
             <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="partner_id"/>
             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <br></br>
             <div id="payment-form">
-
 
                 <b>Datos de la tarjeta</b>
                 <div>
-                    <input type="text" placeholder="Introduce tu nombre" style="border:none; background: none; outline: none;" id="nombre_tarjeta"/>
+                    <input type="text" placeholder="Introduce tu nombre"
+                           style="border:none; background: none; outline: none;" id="nombre_tarjeta"/>
                 </div>
                 <div id="card-element" class="m-3"/>
                 <div id="card-errors" class="m-3 text-danger"/>
