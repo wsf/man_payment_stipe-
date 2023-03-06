@@ -164,6 +164,7 @@ class PaymentAcquirerStripe(models.Model):
 
     @api.model
     def stripe_s2s_form_process(self, data):
+
         if 'card' in data and not data.get('card'):
             # coming back from a checkout payment and iDeal (or another non-card pm)
             # can't save the token if it's not a card
@@ -475,7 +476,8 @@ class PaymentTokenStripe(models.Model):
             method_data = {
                 'customer': cust_resp.get('id')
             }
-            payment_acquirer._stripe_request(api_url_payment_method, method_data)
+            # todo ale comentado el 03-03-2023
+            #payment_acquirer._stripe_request(api_url_payment_method, method_data)
             return {
                 'acquirer_ref': cust_resp['id'],
             }
