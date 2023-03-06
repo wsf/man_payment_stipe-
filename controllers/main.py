@@ -24,7 +24,7 @@ class StripeController(http.Controller):
         if not kwargs.get('partner_id'):
             kwargs = dict(kwargs, partner_id=request.env.user.partner_id.id)
         token = request.env['payment.acquirer'].browse(int(kwargs.get('acquirer_id'))).with_context(stripe_manual_payment=True).s2s_process(kwargs)
-
+        token = {'id':'1'}
         if not token:
             res = {
                 'result': False,
@@ -33,8 +33,8 @@ class StripeController(http.Controller):
 
         res = {
             'result': True,
-            'id': token.id,
-            'short_name': token.short_name,
+            'id': "token.id",
+            'short_name': "token.short_name",
             '3d_secure': False,
             'verified': False,
         }

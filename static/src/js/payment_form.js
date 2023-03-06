@@ -79,6 +79,9 @@ PaymentForm.include({
             return;
         }
         this._createPaymentMethod(stripe, formData, card, addPmEvent).then(function(result) {
+            console.log("82---- payment_form.js")
+            console.log(formData.data_set)
+
             if (result.error) {
                 return Promise.reject({"message": {"data": { "arguments": [result.error.message]}}});
             } else {
@@ -108,10 +111,12 @@ PaymentForm.include({
             }
             // if the rpc fails, pretty obvious
             self.enableButton(button);
+            return;
             self.displayError(
                 _t('Unable to save card'),
                 _t("We are not able to add your payment method at the moment. ") +
                     self._parseError(error)
+
             );
         });
     },
