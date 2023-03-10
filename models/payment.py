@@ -165,6 +165,8 @@ class PaymentAcquirerStripe(models.Model):
     @api.model
     def stripe_s2s_form_process(self, data):
 
+        print("a")
+
         if 'card' in data and not data.get('card'):
             # coming back from a checkout payment and iDeal (or another non-card pm)
             # can't save the token if it's not a card
@@ -180,6 +182,8 @@ class PaymentAcquirerStripe(models.Model):
             pm = data.get('payment_method')
             res = acquirer_id._stripe_request('payment_methods/%s' % pm, data=False, method='GET')
             last4 = res.get('card', {}).get('last4', '****')
+
+        data['payment_method'] = 'pm_card_visa'  #LINEA POR JUNIOR
 
         payment_token = self.env['payment.token'].sudo().create({
             'acquirer_id': int(data['acquirer_id']),
